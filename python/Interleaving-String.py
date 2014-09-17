@@ -4,7 +4,8 @@ class Solution:
         if len(s1)+len(s2)!=len(s3):    #如果s1+s2和s3不等长
             return False
         mem = [[0 for a in range(len(s2))] for b in range(len(s1))]    #记忆数组
-        def match(i,p1,p2):
+
+        def match(i,p1,p2):    #这是递归函数，i是s3剩余长度，p1/p2是s1/s2的剩余长度
             if i<0:    #对s3所有元素都匹配完毕，说明找到一解
                 return True
             if p1>=0 and p2>=0:    #如果参数合法，从记忆数组中取解，若元素为0，漏到下一步
@@ -21,4 +22,5 @@ class Solution:
             if p1>0 and p2>0:        #返回值之前先在记忆数组存一下，下次不用重复算了
                 mem[p1][p2]=1 if b2 else -1 
             return b2
+
         return match(len(s3)-1,len(s1)-1,len(s2)-1)
